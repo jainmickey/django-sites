@@ -2,7 +2,7 @@
 
 from functools import partial
 
-from django.utils.functional import memoize as _memoize, cached_property
+from django.utils.functional import cached_property
 from django.conf import settings
 
 from . import exceptions
@@ -36,17 +36,6 @@ class Site(object):
             raise exceptions.SitesNotConfigured("site has wrong configuration")
         else:
             return name
-
-
-def memoize(function=None, args=0):
-    """
-    Decorator version of django memoize
-    function.
-    """
-
-    if function is None:
-        return partial(memoize, args=args)
-    return _memoize(function, function.__dict__, args)
 
 
 def _get_sites_config():
